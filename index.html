@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<html>
+    <body>
+        <div class="container">
+            <br>
+            <div class="jumbotron">
+                <h1>Tiffany Wise</h1>
+                <br>
+                <input id="name" class="form-control" placeHolder="Name">
+                <br>
+                <input id="email" class="form-control" placeHolder="E-mail Address">
+                <br>
+                <textarea id="message" class="form-control" placeHolder="Leave a Message"></textarea>
+                <br>
+                <Button id="send" class="btn btn-success">Send</Button>
+            </div>
+        
+            <div>
+                <h2>Highlights</h2>
+                <br>
+                <h3>Mobile Application</h3>
+                <br>
+                <p><bold>Technologies Used</bold></p>
+                <ul>React Native</ul>
+                <ul>Native Base</ul>
+                <ul>EXPO</ul>
+                <ul>BitBucket</ul>
+                <ul>Slack</ul>
+        
+                <p>Info on Semita</p>
+                <br>
+                <h3>React Application</h3>
+                <br>
+                <p><bold>Technologies Used</bold></p>
+                <ul>Gatsby</ul>
+                <ul>ReactJS</ul>
+                <ul>JavaScript</ul>
+            </div>
+        
+            <!--Messages left by whomever-->
+            <div id="messages"></div>
+        </div>
+        <script>
+            $(() => {
+                $("#send").click(() => {
+                    var message = {
+                        name: $("#name").val(),
+                        message: $("#message").val()
+                    };
+                    postMessages(message);
+                });
+            });
+        
+            // put message on second html page
+            function postMessages(message){
+                $.post('http://localhost:3000/messages', message);
+            }
+        
+            // display messages in readable format below
+            function getMessages(){
+                $.get('http://localhost:3000/messages', (data) => {
+                    data.forEach((x) => {
+                        addMessage(x);
+                    });
+                });
+            }
+        
+            function addMessage(message){
+                $("#messages").append(
+                        `<h4><bold>Messages</bold></h4>
+                         <h3>Message From: ${message.name}</h3>
+                         <p>Message: ${message.message}</p>`
+                );
+            }
+        </script>
+            </body>
+</html>
