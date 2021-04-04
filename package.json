@@ -12,5 +12,8 @@
     "express": "^4.17.1",
     "jQuery": "^1.7.4",
     "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "jasmine": "^3.7.0"
   }
 }
